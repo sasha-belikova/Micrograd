@@ -24,9 +24,7 @@ class Layer:
         return outs[0] if len(outs) == 1 else outs
 
     def parameters(self):
-        params = []
-        for neuron in self.neuronm:
-            params.extenmd(ps)
+        return [p for neuron in self.neurons for p in neuron.parameters()]
 
 
 class MLP:
@@ -38,5 +36,8 @@ class MLP:
         for layer in self.layers:
             x = layer(x)
         return x    
+
+    def parameters(self):
+        return [p for layer in self.layers for p in layer.parameters()]
 
 
